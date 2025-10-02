@@ -7,21 +7,21 @@
   <style>
     :root {
       --bg: #0f172a;
-      --bg-2: rgba(255,255,255,0.05);
+      --bg-2: rgba(255,255,255,0.08);
       --ink: #e2e8f0;
       --muted: #94a3b8;
       --primary: #22d3ee;
       --accent: #8b5cf6;
       --neon: #38bdf8;
-      --radius: 20px;
-      --shadow: 0 0 25px rgba(34,211,238,0.6);
-      --transition: all .4s ease;
-      --max-width: 1100px;
+      --radius: 18px;
+      --shadow: 0 0 18px rgba(34,211,238,0.5);
+      --transition: all .3s ease;
+      --max-width: 900px;
     }
     body {
       margin: 0;
       font-family: "Noto Naskh Arabic UI", system-ui, sans-serif;
-      background: radial-gradient(circle at top left, #0f172a, #020617);
+      background: linear-gradient(135deg,#0f172a,#020617);
       color: var(--ink);
       line-height: 1.7;
       overflow-x: hidden;
@@ -38,18 +38,26 @@
     header {
       position: sticky;
       top: 0;
-      background: rgba(2,6,23,0.6);
+      background: rgba(2,6,23,0.8);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(255,255,255,0.1);
-      padding: 14px 24px;
+      padding: 12px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 50;
     }
-    header h1 { font-size: 24px; margin: 0; font-weight: 900; color: var(--neon); text-shadow: 0 0 8px var(--neon); text-align: center; flex:1; }
+    header h1 {
+      font-size: 20px;
+      margin: 0;
+      font-weight: 800;
+      color: var(--neon);
+      text-shadow: 0 0 8px var(--neon);
+      text-align: center;
+      flex: 1;
+    }
     #themeToggle {
-      padding: 8px 14px;
+      padding: 6px 12px;
       border: none;
       border-radius: var(--radius);
       cursor: pointer;
@@ -64,82 +72,77 @@
     .tabs {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
-      margin: 30px auto;
+      gap: 10px;
+      margin: 20px auto;
       justify-content: center;
+      padding: 0 10px;
     }
     .tab-btn {
-      padding: 10px 22px;
+      flex: 1 1 auto;
+      min-width: 120px;
+      padding: 8px 14px;
       border: none;
       border-radius: 999px;
       background: var(--bg-2);
       color: var(--ink);
       font-weight: bold;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      box-shadow: 0 0 8px rgba(0,0,0,0.4);
       cursor: pointer;
       transition: var(--transition);
-      letter-spacing: 1px;
+      text-align: center;
     }
     .tab-btn:hover { background: var(--accent); color: #fff; box-shadow: var(--shadow); }
-    .tab-btn.active { background: var(--primary); color: #0f172a; box-shadow: 0 0 20px var(--primary); }
-    .panel { display: none; animation: fade .6s ease; }
+    .tab-btn.active { background: var(--primary); color: #0f172a; box-shadow: 0 0 14px var(--primary); }
+    .panel { display: none; animation: fade .4s ease; }
     .panel.active { display: block; }
-    @keyframes fade { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+    @keyframes fade { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
-      margin-top: 25px;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 15px;
+      padding: 0 10px;
     }
     .card {
-      background: rgba(255,255,255,0.04);
-      padding: 24px;
+      background: rgba(255,255,255,0.05);
+      padding: 18px;
       border-radius: var(--radius);
-      box-shadow: 0 0 20px rgba(34,211,238,0.2);
+      box-shadow: 0 0 15px rgba(34,211,238,0.2);
       transition: var(--transition);
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 10px;
       border: 1px solid rgba(255,255,255,0.1);
-      backdrop-filter: blur(14px);
+      backdrop-filter: blur(10px);
       position: relative;
       overflow: hidden;
     }
-    .card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg,transparent,rgba(34,211,238,0.1),transparent);
-      transform: translateX(-100%);
-      animation: shine 6s infinite;
-    }
-    @keyframes shine { 100%{ transform: translateX(100%);} }
-    .card:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 0 30px var(--accent); }
-    .card h3 { margin: 0; font-size: 19px; color: var(--neon); text-shadow: 0 0 6px var(--neon); }
-    .card p { margin: 0; color: var(--muted); font-size: 15px; }
-    .actions { display: flex; gap: 12px; margin-top: auto; }
+    .card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 0 20px var(--accent); }
+    .card h3 { margin: 0; font-size: 17px; color: var(--neon); text-shadow: 0 0 4px var(--neon); }
+    .card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .actions { display: flex; gap: 8px; margin-top: auto; }
     .btn {
       flex: 1;
-      padding: 10px;
+      padding: 8px;
       border: none;
-      border-radius: 12px;
+      border-radius: 10px;
       cursor: pointer;
       font-weight: bold;
       transition: var(--transition);
+      font-size: 13px;
     }
-    .btn.primary { background: var(--primary); color: #0f172a; box-shadow: 0 0 10px var(--primary); }
+    .btn.primary { background: var(--primary); color: #0f172a; box-shadow: 0 0 8px var(--primary); }
     .btn.ghost { background: var(--accent); color: #fff; }
-    .btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: var(--shadow); }
-    footer { text-align: center; padding: 25px; margin-top: 50px; color: var(--muted); font-size: 14px; }
-    footer strong { color: var(--neon); text-shadow: 0 0 6px var(--neon); }
+    .btn:hover { transform: translateY(-2px) scale(1.04); box-shadow: var(--shadow); }
+    footer { text-align: center; padding: 20px; margin-top: 30px; color: var(--muted); font-size: 13px; }
+    footer strong { color: var(--neon); text-shadow: 0 0 4px var(--neon); }
 
     /* تحسين العرض على الهواتف */
     @media (max-width: 600px) {
-      header h1 { font-size: 18px; }
-      .tab-btn { flex: 1 1 100%; text-align: center; }
-      .grid { grid-template-columns: 1fr; }
-      .card { padding: 18px; }
-      .btn { font-size: 14px; padding: 8px; }
+      header h1 { font-size: 16px; }
+      .tab-btn { flex: 1 1 100%; min-width: unset; font-size: 14px; }
+      .card { padding: 15px; }
+      .btn { font-size: 12px; padding: 6px; }
     }
   </style>
 </head>
@@ -161,47 +164,44 @@
   <script>
     const subjects = [
       {id:'prothese', name:'Prothèse', lessons:[
-        {title:'Cours 01', desc:'مقدمة في Prothèse', pdf:'PDFS/prothese-cours01.pdf'},
-       
+        {title:'Cours 01', desc:'مقدمة في Prothèse', pdf:'https://drive.google.com/uc?export=download&id=1TDejEKUU6dWjIQaCpF2Mm5qoBdsyP3Db'},
+        {title:'Cours 02', desc:'الدرس الثاني', pdf:'PDFS/prothese-cours02.pdf'}
       ]},
       {id:'oce', name:'OCE', lessons:[
-       
+        {title:'Cours 01', desc:'مقدمة في OCE', pdf:'PDFS/oce-cours01.pdf'}
       ]},
       {id:'odf', name:'ODF', lessons:[
-        
+        {title:'Cours 01', desc:'مقدمة في ODF', pdf:'PDFS/odf-cours01.pdf'}
       ]},
       {id:'anatomie-h', name:'Anatomie Humaine', lessons:[
-        
+        {title:'Cours 01', desc:'الجهاز العظمي', pdf:'PDFS/anatH-cours01.pdf'}
       ]},
       {id:'anatomie-d', name:'Anatomie Dentaire', lessons:[
-        
+        {title:'Cours 01', desc:'تشريح الأسنان', pdf:'PDFS/anatD-cours01.pdf'}
       ]},
       {id:'microbiologie', name:'Microbiologie', lessons:[
-{title:'Cours 01', desc:'Physiologie bactérienne dentaire  ', pdf:'https://drive.google.com/uc?export=download&id=1I10Vcx98XUtWSXSRrSZxaznOWGjPzhuU'},
+        {title:'Cours 01', desc:'مدخل إلى الميكروبيولوجيا', pdf:'PDFS/microbio-cours01.pdf'}
       ]},
       {id:'immunologie', name:'Immunologie', lessons:[
-       
+        {title:'Cours 01', desc:'الجهاز المناعي', pdf:'PDFS/immuno-cours01.pdf'}
       ]},
       {id:'informatique', name:'Informatique', lessons:[
-       
+        {title:'Cours 01', desc:'مقدمة في الإعلام الآلي', pdf:'PDFS/info-cours01.pdf'}
       ]},
       {id:'biomateriaux', name:'Biomatériaux', lessons:[
-       
+        {title:'Cours 01', desc:'مواد حيوية 1', pdf:'PDFS/biomat-cours01.pdf'}
       ]},
       {id:'physiologie', name:'Physiologie', lessons:[
-       
+        {title:'Cours 01', desc:'فيزيولوجيا 1', pdf:'PDFS/physio-cours01.pdf'}
       ]},
       {id:'english', name:'English', lessons:[
-       
+        {title:'Lesson 01', desc:'Medical terms', pdf:'PDFS/eng-lesson01.pdf'}
       ]},
       {id:'parodontologie', name:'Parodontologie', lessons:[
-      {title:'Cours01 ', desc:'INTRODUCTION A LA PARODONTOLOGIE ', pdf:'https://drive.google.com/uc?export=download&id=1rIGNNUfsoC4nqTjYQMea_zd4b1g3heee1PduRbzPfN5J2v_kIagjA-KEPsC6iiNRl'},
-{title:'Cours 02 ', desc:' Histoire de la parodontologie et évolution des concepts thérapeutiques', pdf:'https://drive.google.com/uc?export=download&id='},
-{title:'Cours 03', desc:'La gencive  ', pdf:'https://drive.google.com/uc?export=download&id=1TDejEKUU6dWjIQaCpF2Mm5qoBdsyP3Db'},
-
+        {title:'Cours 01', desc:'أمراض اللثة', pdf:'PDFS/paro-cours01.pdf'}
       ]},
       {id:'pathologie', name:'Pathologie', lessons:[
-      
+        {title:'Cours 01', desc:'علم الأمراض', pdf:'PDFS/patho-cours01.pdf'}
       ]}
     ];
 
