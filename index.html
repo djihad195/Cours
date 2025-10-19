@@ -1,257 +1,322 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>دروس السنة الثانية طب الأسنان</title>
+  <title>Cours de 2ème Année - Médecine Dentaire</title>
+
   <style>
     :root {
       --bg: #0f172a;
-      --bg-2: rgba(255,255,255,0.08);
+      --bg-light: #f8fafc;
       --ink: #e2e8f0;
+      --ink-dark: #1e293b;
       --muted: #94a3b8;
-      --primary: #22d3ee;
-      --accent: #8b5cf6;
+      --primary: #06b6d4;
+      --accent: #a855f7;
       --neon: #38bdf8;
-      --radius: 18px;
-      --shadow: 0 0 18px rgba(34,211,238,0.5);
+      --radius: 20px;
+      --shadow: 0 0 15px rgba(34,211,238,0.3);
       --transition: all .3s ease;
-      --max-width: 900px;
+      --max-width: 1000px;
     }
+
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      font-family: "Noto Naskh Arabic UI", system-ui, sans-serif;
-      background: linear-gradient(135deg,#0f172a,#020617);
+      font-family: "Poppins", "Noto Sans", sans-serif;
+      background: radial-gradient(circle at top left, #020617, #0f172a);
       color: var(--ink);
-      line-height: 1.7;
-      overflow-x: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
+      min-height: 100vh;
+      transition: var(--transition);
     }
-    header, main, footer {
-      width: 100%;
-      max-width: var(--max-width);
-      margin-left: auto;
-      margin-right: auto;
-    }
+
     header {
-      position: sticky;
-      top: 0;
+      width: 100%;
       background: rgba(2,6,23,0.8);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(255,255,255,0.1);
-      padding: 12px 18px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 15px 25px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 50;
     }
+
     header h1 {
-      font-size: 20px;
       margin: 0;
-      font-weight: 800;
+      font-size: 22px;
       color: var(--neon);
       text-shadow: 0 0 8px var(--neon);
-      text-align: center;
-      flex: 1;
+      font-weight: 800;
+      animation: glow 3s infinite alternate;
     }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 8px var(--neon), 0 0 16px var(--primary); }
+      to { text-shadow: 0 0 16px var(--accent), 0 0 32px var(--neon); }
+    }
+
     #themeToggle {
-      padding: 6px 12px;
+      background: linear-gradient(135deg,var(--primary),var(--accent));
+      color: white;
       border: none;
       border-radius: var(--radius);
-      cursor: pointer;
-      background: linear-gradient(135deg,var(--primary),var(--accent));
-      color: #fff;
+      padding: 10px 14px;
       font-weight: bold;
+      cursor: pointer;
       box-shadow: var(--shadow);
       transition: var(--transition);
-      margin-left: 10px;
     }
-    #themeToggle:hover { transform: scale(1.05); }
+
+    #themeToggle:hover { transform: scale(1.1) rotate(4deg); }
+
+    .search-bar {
+      width: 90%;
+      max-width: var(--max-width);
+      margin: 25px auto 10px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(255,255,255,0.08);
+      color: var(--ink);
+      font-size: 15px;
+      outline: none;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      transition: var(--transition);
+    }
+
+    .search-bar input:focus { box-shadow: 0 0 20px var(--neon); }
+
     .tabs {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
       margin: 20px auto;
       justify-content: center;
-      padding: 0 10px;
+      width: 90%;
+      max-width: var(--max-width);
     }
+
     .tab-btn {
-      flex: 1 1 auto;
-      min-width: 120px;
-      padding: 8px 14px;
-      border: none;
-      border-radius: 999px;
-      background: var(--bg-2);
+      background: var(--bg);
       color: var(--ink);
-      font-weight: bold;
-      box-shadow: 0 0 8px rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      padding: 10px 16px;
       cursor: pointer;
       transition: var(--transition);
-      text-align: center;
+      font-weight: 600;
+      text-transform: capitalize;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
-    .tab-btn:hover { background: var(--accent); color: #fff; box-shadow: var(--shadow); }
-    .tab-btn.active { background: var(--primary); color: #0f172a; box-shadow: 0 0 14px var(--primary); }
+
+    .tab-btn:hover { background: var(--accent); color: #fff; box-shadow: 0 0 18px var(--accent); }
+    .tab-btn.active { background: var(--primary); color: #0f172a; box-shadow: 0 0 18px var(--primary); }
+
     .panel { display: none; animation: fade .4s ease; }
     .panel.active { display: block; }
-    @keyframes fade { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+
+    @keyframes fade {
+      from {opacity: 0; transform: translateY(15px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
     .grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      margin-top: 15px;
-      padding: 0 10px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      padding: 10px;
+      width: 90%;
+      max-width: var(--max-width);
+      margin: auto;
     }
+
     .card {
       background: rgba(255,255,255,0.05);
-      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 20px;
       border-radius: var(--radius);
-      box-shadow: 0 0 15px rgba(34,211,238,0.2);
+      box-shadow: var(--shadow);
       transition: var(--transition);
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      border: 1px solid rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
-      position: relative;
-      overflow: hidden;
+      justify-content: space-between;
+      backdrop-filter: blur(12px);
     }
-    .card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 0 20px var(--accent); }
-    .card h3 { margin: 0; font-size: 17px; color: var(--neon); text-shadow: 0 0 4px var(--neon); }
-    .card p { margin: 0; color: var(--muted); font-size: 14px; }
-    .actions { display: flex; gap: 8px; margin-top: auto; }
+
+    .card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 0 25px var(--accent);
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 18px;
+      color: var(--neon);
+      text-shadow: 0 0 4px var(--neon);
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 5px;
+      flex-grow: 1;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
     .btn {
       flex: 1;
-      padding: 8px;
+      padding: 9px;
       border: none;
       border-radius: 10px;
-      cursor: pointer;
       font-weight: bold;
+      cursor: pointer;
       transition: var(--transition);
-      font-size: 13px;
+      font-size: 14px;
     }
-    .btn.primary { background: var(--primary); color: #0f172a; box-shadow: 0 0 8px var(--primary); }
-    .btn.ghost { background: var(--accent); color: #fff; }
-    .btn:hover { transform: translateY(-2px) scale(1.04); box-shadow: var(--shadow); }
-    footer { text-align: center; padding: 20px; margin-top: 30px; color: var(--muted); font-size: 13px; }
-    footer strong { color: var(--neon); text-shadow: 0 0 4px var(--neon); }
 
-    /* تحسين العرض على الهواتف */
-    @media (max-width: 600px) {
-      header h1 { font-size: 16px; }
-      .tab-btn { flex: 1 1 100%; min-width: unset; font-size: 14px; }
-      .card { padding: 15px; }
-      .btn { font-size: 12px; padding: 6px; }
+    .btn.primary { background: var(--primary); color: #0f172a; }
+    .btn.ghost { background: var(--accent); color: #fff; }
+    .btn:hover { transform: scale(1.05); box-shadow: var(--shadow); }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 25px;
+      font-size: 14px;
+      color: var(--muted);
     }
+    footer strong { color: var(--neon); text-shadow: 0 0 6px var(--neon); }
+
+    /* Mode clair */
+    body.light {
+      background: linear-gradient(135deg,#f8fafc,#e2e8f0);
+      color: var(--ink-dark);
+    }
+    body.light header { background: rgba(255,255,255,0.7); }
+    body.light .tab-btn { background: #fff; color: #0f172a; }
+    body.light .card { background: rgba(255,255,255,0.9); color: #0f172a; }
   </style>
 </head>
+
 <body>
   <header>
-    <h1>🚀 دروس السنة الثانية طب الأسنان</h1>
-    <button id="themeToggle">⚡</button>
+    <h1>🎓 Cours - 2ème Année Médecine Dentaire</h1>
+    <button id="themeToggle">🌙</button>
   </header>
 
-  <main class="container">
-    <nav id="tabs" class="tabs"></nav>
-    <section id="panels"></section>
-  </main>
+  <div class="search-bar">
+    <input id="search" type="text" placeholder="🔍 Rechercher un cours..." />
+  </div>
+
+  <nav id="tabs" class="tabs"></nav>
+  <section id="panels"></section>
 
   <footer>
-    <p>مصمم من طرف <strong>BENABBES DJIHAD</strong> 🌌</p>
+    <p>Créé avec passion par <strong>BENABBES DJIHAD</strong> 🦷✨</p>
   </footer>
 
   <script>
     const subjects = [
       {id:'prothese', name:'Prothèse', lessons:[
-      {title:'Cours01', desc:'les indices biologiques', pdf:'https://drive.google.com/file/d/1vYyMyjVdp12vhU0hN6sLfYgYuJ23AkzT/preview'},
-
-      ]},
-      {id:'oce', name:'OCE', lessons:[
-
-    
-      ]},
-      {id:'odf', name:'ODF', lessons:[
-        
+        {title:'Cours 01', desc:'Les indices biologiques', pdf:'https://drive.google.com/file/d/1vYyMyjVdp12vhU0hN6sLfYgYuJ23AkzT/preview'},
       ]},
       {id:'anatomie-h', name:'Anatomie Humaine', lessons:[
-    {title:'Cours01', desc:'Os crant-ethmoide-frontal ', pdf:'https://drive.google.com/file/d/1DzcyBZGlhuZ5Tn9QfomDZk8xs0LQ3Wja/preview'},
-{title:'Cours02', desc:'sphenoide temp parietal', pdf:'https://drive.google.com/file/d/1ecdQloRk3BpZf65SG0eBZyplrFT0YWPO/preview'},
-
+        {title:'Cours 01', desc:'Os crânien : ethmoïde et frontal', pdf:'https://drive.google.com/file/d/1DzcyBZGlhuZ5Tn9QfomDZk8xs0LQ3Wja/preview'},
+        {title:'Cours 02', desc:'Sphénoïde, temporal, pariétal', pdf:'https://drive.google.com/file/d/1ecdQloRk3BpZf65SG0eBZyplrFT0YWPO/preview'},
       ]},
       {id:'anatomie-d', name:'Anatomie Dentaire', lessons:[
-{title:'Cours01', desc:'Généralités et notions de bases.', pdf:'https://drive.google.com/file/d/1VI-tncSNI9q2oKWQvc_WfKx9oYPMOvde/preview'},
-
-    ]},
+        {title:'Cours 01', desc:'Généralités et notions de base', pdf:'https://drive.google.com/file/d/1VI-tncSNI9q2oKWQvc_WfKx9oYPMOvde/preview'},
+      ]},
       {id:'microbiologie', name:'Microbiologie', lessons:[
-{title:'Cours01 ', desc:'Physiologie bactérienne dentaire ', pdf:'https://drive.google.com/file/d/1I10Vcx98XUtWSXSRrSZxaznOWGjPzhuU/preview'},
-{title:'Cours02', desc:'Les antibiotiques', pdf:'https://drive.google.com/file/d/1Z_pxoS5FscC2bgv38dVH4q0-GASHdfBa/preview'},
-
-    ]},
-      {id:'immunologie', name:'Immunologie', lessons:[
-
-    ]},
-      {id:'informatique', name:'Informatique', lessons:[
-
-    ]},
-      {id:'biomateriaux', name:'Biomatériaux', lessons:[
-
-    ]},
-      {id:'physiologie', name:'Physiologie', lessons:[
-
-    ]},
-      {id:'english', name:'English', lessons:[
-
-    ]},
+        {title:'Cours 01', desc:'Physiologie bactérienne dentaire', pdf:'https://drive.google.com/file/d/1I10Vcx98XUtWSXSRrSZxaznOWGjPzhuU/preview'},
+        {title:'Cours 02', desc:'Les antibiotiques', pdf:'https://drive.google.com/file/d/1Z_pxoS5FscC2bgv38dVH4q0-GASHdfBa/preview'},
+      ]},
       {id:'parodontologie', name:'Parodontologie', lessons:[
-{title:'Cours01 ', desc:'INTRODUCTION', pdf:'https://drive.google.com/file/d/1rIGNNUfsoC4nqTjYQMea_zd4b1g3heee/preview'},
-{title:'Cours02 ', desc:'Histoire de la parodontologie et évolution des concepts', pdf:'https://drive.google.com/file/d/1PduRbzPfN5J2v_kIagjA-KEPsC6iiNRl/preview'},
-{title:'Cours03', desc:'La gencive ', pdf:'https://drive.google.com/file/d/1Qs0ONJo12REjC4JpFMwKmJaVa_lnoif7/preview'},
- {title:'Cours04', desc:'ATTACHE EPITHELIALE', pdf:'https://drive.google.com/file/d/1nRHJgXXweexCm78PxF9RF1GU-OpELjNA/preview'},
+        {title:'Cours 01', desc:'Introduction à la parodontologie', pdf:'https://drive.google.com/file/d/1rIGNNUfsoC4nqTjYQMea_zd4b1g3heee/preview'},
+        {title:'Cours 02', desc:'Historique et évolution des concepts', pdf:'https://drive.google.com/file/d/1PduRbzPfN5J2v_kIagjA-KEPsC6iiNRl/preview'},
+        {title:'Cours 03', desc:'La gencive', pdf:'https://drive.google.com/file/d/1Qs0ONJo12REjC4JpFMwKmJaVa_lnoif7/preview'},
+        {title:'Cours 04', desc:'Attache épithéliale', pdf:'https://drive.google.com/file/d/1nRHJgXXweexCm78PxF9RF1GU-OpELjNA/preview'},
+        {title:'Cours 05', desc:'Le ligament alvéolo-dentaire', pdf:'https://drive.google.com/file/d/1iZ5OLTAWhsBZGaaRVmKoaJ7xvSy5K5yC/preview'},
 
-    ]},
+      ]},
       {id:'pathologie', name:'Pathologie', lessons:[
-{title:'Cours01', desc:'Cabinet Dentaire et Dispositifs chirurgicaux', pdf:'https://drive.google.com/file/d/1bs0U0Tmaek4YvquXE973AalHl6Y9UeHT/preview'},
-
-    ]}
+        {title:'Cours 01', desc:'Cabinet dentaire et dispositifs chirurgicaux', pdf:'https://drive.google.com/file/d/1bs0U0Tmaek4YvquXE973AalHl6Y9UeHT/preview'},
+      ]},
     ];
 
     const tabs = document.getElementById('tabs');
     const panels = document.getElementById('panels');
+    const searchInput = document.getElementById('search');
 
-    subjects.forEach((s,i)=>{
+    subjects.forEach((s, i) => {
       const btn = document.createElement('button');
       btn.className = 'tab-btn';
       btn.textContent = s.name;
-      btn.onclick = ()=> activate(s.id);
+      btn.onclick = () => activate(s.id);
       tabs.appendChild(btn);
 
       const panel = document.createElement('section');
       panel.className = 'panel';
       panel.id = s.id;
+      updatePanel(panel, s);
+      panels.appendChild(panel);
+
+      if (i === 0) activate(s.id);
+    });
+
+    function updatePanel(panel, subject) {
       let cards = '';
-      s.lessons.forEach(lesson=>{
+      subject.lessons.forEach(lesson => {
         cards += `<div class='card'>
           <h3>${lesson.title}</h3>
           <p>${lesson.desc}</p>
           <div class='actions'>
-            <a class='btn primary' href='${lesson.pdf}' target='_blank'>👁 مشاهدة</a>
-            <a class='btn ghost' href='${lesson.pdf}' download>⬇ تحميل</a>
+            <a class='btn primary' href='${lesson.pdf}' target='_blank'>👁 Voir</a>
+            <a class='btn ghost' href='${lesson.pdf}' download>⬇ Télécharger</a>
           </div>
         </div>`;
       });
-      panel.innerHTML = `<h2>${s.name}</h2><div class='grid'>${cards}</div>`;
-      panels.appendChild(panel);
-      if(i===0) activate(s.id);
-    });
-
-    function activate(id){
-      document.querySelectorAll('.tab-btn').forEach(b=> b.classList.toggle('active', b.textContent===subjects.find(s=>s.id===id).name));
-      document.querySelectorAll('.panel').forEach(p=> p.classList.toggle('active', p.id===id));
+      panel.innerHTML = `<h2 style='text-align:center;color:var(--neon)'>${subject.name}</h2><div class='grid'>${cards}</div>`;
     }
 
-    document.getElementById('themeToggle').onclick=()=>{
-      document.body.classList.toggle('dark');
+    function activate(id) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.textContent === subjects.find(s => s.id === id).name));
+      document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === id));
+    }
+
+    // Recherche dynamique
+    searchInput.addEventListener('input', e => {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll('.card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(q) ? 'flex' : 'none';
+      });
+    });
+
+    // Thème clair/obscur
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.onclick = () => {
+      document.body.classList.toggle('light');
+      themeBtn.textContent = document.body.classList.contains('light') ? '🌙' : '☀️';
     };
   </script>
 </body>
