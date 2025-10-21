@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cours de 2ème Année - Médecine Dentaire</title>
-
   <style>
     :root {
       --bg: #0f172a;
@@ -51,7 +50,7 @@
 
     header h1 {
       margin: 0;
-      font-size: 22px;
+      font-size: 20px;
       color: var(--neon);
       text-shadow: 0 0 8px var(--neon);
       font-weight: 800;
@@ -80,7 +79,7 @@
     .search-bar {
       width: 90%;
       max-width: var(--max-width);
-      margin: 25px auto 10px;
+      margin: 20px auto 10px;
       display: flex;
       justify-content: center;
     }
@@ -103,10 +102,10 @@
     .tabs {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin: 20px auto;
+      gap: 10px;
+      margin: 15px auto;
       justify-content: center;
-      width: 90%;
+      width: 95%;
       max-width: var(--max-width);
     }
 
@@ -115,16 +114,26 @@
       color: var(--ink);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 999px;
-      padding: 10px 16px;
+      padding: 10px 14px;
       cursor: pointer;
       transition: var(--transition);
       font-weight: 600;
       text-transform: capitalize;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 250px;
+      text-align: center;
     }
 
-    .tab-btn:hover { background: var(--accent); color: #fff; box-shadow: 0 0 18px var(--accent); }
-    .tab-btn.active { background: var(--primary); color: #0f172a; box-shadow: 0 0 18px var(--primary); }
+    .tab-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 18px var(--accent);
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      color: #0f172a;
+      box-shadow: 0 0 18px var(--primary);
+    }
 
     .panel { display: none; animation: fade .4s ease; }
     .panel.active { display: block; }
@@ -136,11 +145,10 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: 1fr;
       gap: 20px;
       padding: 10px;
-      width: 90%;
-      max-width: var(--max-width);
+      width: 95%;
       margin: auto;
     }
 
@@ -178,13 +186,14 @@
 
     .actions {
       display: flex;
+      flex-direction: column;
       gap: 10px;
       margin-top: 15px;
     }
 
     .btn {
-      flex: 1;
-      padding: 9px;
+      width: 100%;
+      padding: 10px;
       border: none;
       border-radius: 10px;
       font-weight: bold;
@@ -214,6 +223,12 @@
     body.light header { background: rgba(255,255,255,0.7); }
     body.light .tab-btn { background: #fff; color: #0f172a; }
     body.light .card { background: rgba(255,255,255,0.9); color: #0f172a; }
+
+    /* Responsive */
+    @media (min-width: 600px) {
+      .grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      .actions { flex-direction: row; }
+    }
   </style>
 </head>
 
@@ -243,7 +258,6 @@
         {title:'Cours 01', desc:'Os crânien : ethmoïde et frontal', pdf:'https://drive.google.com/file/d/1DzcyBZGlhuZ5Tn9QfomDZk8xs0LQ3Wja/preview'},
         {title:'Cours 02', desc:'Sphénoïde, temporal, pariétal', pdf:'https://drive.google.com/file/d/1ecdQloRk3BpZf65SG0eBZyplrFT0YWPO/preview'},
         {title:'Cours 03', desc:'Os du crane III', pdf:'https://drive.google.com/file/d/1L7BPPh2cDoM_Nvtcw9sQUK5kS9kl_OkT/preview'},
-
       ]},
       {id:'anatomie-d', name:'Anatomie Dentaire', lessons:[
         {title:'Cours 01', desc:'Généralités et notions de base', pdf:'https://drive.google.com/file/d/1VI-tncSNI9q2oKWQvc_WfKx9oYPMOvde/preview'},
@@ -258,17 +272,14 @@
         {title:'Cours 03', desc:'La gencive', pdf:'https://drive.google.com/file/d/1Qs0ONJo12REjC4JpFMwKmJaVa_lnoif7/preview'},
         {title:'Cours 04', desc:'Attache épithéliale', pdf:'https://drive.google.com/file/d/1nRHJgXXweexCm78PxF9RF1GU-OpELjNA/preview'},
         {title:'Cours 05', desc:'Le ligament alvéolo-dentaire', pdf:'https://drive.google.com/file/d/1iZ5OLTAWhsBZGaaRVmKoaJ7xvSy5K5yC/preview'},
-
       ]},
       {id:'pathologie', name:'Pathologie', lessons:[
         {title:'Cours 01', desc:'Cabinet dentaire et dispositifs chirurgicaux', pdf:'https://drive.google.com/file/d/1bs0U0Tmaek4YvquXE973AalHl6Y9UeHT/preview'},
       ]},
       {id:'ODF', name:'ODF', lessons:[
-{title:'Cours 01', desc:'Introduction', pdf:'https://drive.google.com/file/d/1d1YOmQ_AHg6oE6ndxpbc00AmACYtXQvh/preview'},
-{title:'Cours 02', desc:'les critères dharmonie du visage ' , pdf:'https://drive.google.com/file/d/1HpJQhs1m_FAiiEdjchtH1wfy5dmwgvxl/preview'},
-{title:'Cours 03', desc:'les fonction oro_faciales ', pdf:'https://drive.google.com/file/d/1sEmex9CXYzJg6XrMcQBwf7IT2qWSAtiu/preview'},
-
-
+        {title:'Cours 01', desc:'Introduction', pdf:'https://drive.google.com/file/d/1d1YOmQ_AHg6oE6ndxpbc00AmACYtXQvh/preview'},
+        {title:'Cours 02', desc:'les critères dharmonie du visage ', pdf:'https://drive.google.com/file/d/1HpJQhs1m_FAiiEdjchtH1wfy5dmwgvxl/preview'},
+        {title:'Cours 03', desc:'les fonction oro_faciales ', pdf:'https://drive.google.com/file/d/1sEmex9CXYzJg6XrMcQBwf7IT2qWSAtiu/preview'},
       ]},
     ];
 
