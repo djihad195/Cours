@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cours de 2ème Année - Médecine Dentaire</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0a84ff">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+
   <style>
     :root {
       --bg: #0f172a;
@@ -231,13 +237,6 @@
     }
   </style>
 </head>
-<head>
-  ...
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#0a84ff">
-  <link rel="apple-touch-icon" href="icons/icon-192.png">
-</head>
-
 
 <body>
   <header>
@@ -267,15 +266,11 @@
         {title:'Cours 02', desc:'Sphénoïde, temporal, pariétal', pdf:'https://drive.google.com/file/d/1ecdQloRk3BpZf65SG0eBZyplrFT0YWPO/preview'},
         {title:'Cours 03', desc:'Os du crane III', pdf:'https://drive.google.com/file/d/1L7BPPh2cDoM_Nvtcw9sQUK5kS9kl_OkT/preview'},
         {title:'Cours 04', desc:'Os dela face I', pdf:'https://drive.google.com/file/d/1V6m2_RyPMyTGb5i4kSN_iyb6HSD60chR/preview'},
-
-
       ]},
       {id:'anatomie-d', name:'Anatomie Dentaire', lessons:[
         {title:'Cours 01', desc:'Généralités et notions de base', pdf:'https://drive.google.com/file/d/1VI-tncSNI9q2oKWQvc_WfKx9oYPMOvde/preview'},
-{title:'Cours 02 ', desc:'Nomenclature', pdf:'https://drive.google.com/file/d/1zbO_UDk0OJcNEJbGEwurPmp4j9JeqyUI/preview'},
-{title:'Cours 03', desc:'Terminologie', pdf:'https://drive.google.com/file/d/1So-wKFZxWpKIFA0UO2Ntp-3mgrf7VU_r/preview'},
-
-
+        {title:'Cours 02 ', desc:'Nomenclature', pdf:'https://drive.google.com/file/d/1zbO_UDk0OJcNEJbGEwurPmp4j9JeqyUI/preview'},
+        {title:'Cours 03', desc:'Terminologie', pdf:'https://drive.google.com/file/d/1So-wKFZxWpKIFA0UO2Ntp-3mgrf7VU_r/preview'},
       ]},
       {id:'microbiologie', name:'Microbiologie', lessons:[
         {title:'Cours 01', desc:'Physiologie bactérienne dentaire', pdf:'https://drive.google.com/file/d/1I10Vcx98XUtWSXSRrSZxaznOWGjPzhuU/preview'},
@@ -289,8 +284,6 @@
         {title:'Cours 05', desc:'Le ligament alvéolo-dentaire', pdf:'https://drive.google.com/file/d/1iZ5OLTAWhsBZGaaRVmKoaJ7xvSy5K5yC/preview'},
         {title:'Cours 06', desc:'LES CEMENTS', pdf:'https://drive.google.com/file/d/1wamOlgtkm3d0Jp0PtIz4xjggr9DCfBwr/preview'},
         {title:'Cours 07', desc:'L_OS_ALVEOLAIRE', pdf:'https://drive.google.com/file/d/1kyOnPmAmTcXcXOBl_4NQDHE9x2kR7jR1/preview'},
-
-
       ]},
       {id:'pathologie', name:'Pathologie', lessons:[
         {title:'Cours 01', desc:'Cabinet dentaire et dispositifs chirurgicaux', pdf:'https://drive.google.com/file/d/1bs0U0Tmaek4YvquXE973AalHl6Y9UeHT/preview'},
@@ -299,13 +292,12 @@
         {title:'Cours 01', desc:'Introduction', pdf:'https://drive.google.com/file/d/1d1YOmQ_AHg6oE6ndxpbc00AmACYtXQvh/preview'},
         {title:'Cours 02', desc:'les critères dharmonie du visage ', pdf:'https://drive.google.com/file/d/1HpJQhs1m_FAiiEdjchtH1wfy5dmwgvxl/preview'},
         {title:'Cours 03', desc:'les fonction oro_faciales ', pdf:'https://drive.google.com/file/d/1sEmex9CXYzJg6XrMcQBwf7IT2qWSAtiu/preview'},
-      ]},   
-         {id:'Hygiène', name:'Hygiène', lessons:[
-          {title:'Cours 01', desc:'la sante bucco dentaire et les populations a risque', pdf:'https://drive.google.com/file/d/1iuM10dx5PSyPu4wyPAZr1fBQPDE99ndJ/preview'},
-{title:'Cours 02', desc:'ALIMENTATION, NUTRITION ET SANTE DENTAIRE', pdf:'https://drive.google.com/file/d/1tGl6_m8_euI-GjEdLX4h8S48tC3_UUDR/preview'},
-
- ]},
-    ];Hygiène
+      ]},
+      {id:'Hygiène', name:'Hygiène', lessons:[
+        {title:'Cours 01', desc:'la sante bucco dentaire et les populations a risque', pdf:'https://drive.google.com/file/d/1iuM10dx5PSyPu4wyPAZr1fBQPDE99ndJ/preview'},
+        {title:'Cours 02', desc:'ALIMENTATION, NUTRITION ET SANTE DENTAIRE', pdf:'https://drive.google.com/file/d/1tGl6_m8_euI-GjEdLX4h8S48tC3_UUDR/preview'}
+      ]},
+    ];
 
     const tabs = document.getElementById('tabs');
     const panels = document.getElementById('panels');
@@ -362,6 +354,17 @@
       document.body.classList.toggle('light');
       themeBtn.textContent = document.body.classList.contains('light') ? '🌙' : '☀️';
     };
+  </script>
+
+  <!-- Service Worker registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(reg => console.log('SW registered:', reg.scope))
+          .catch(err => console.error('SW registration failed:', err));
+      });
+    }
   </script>
 </body>
 </html>

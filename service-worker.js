@@ -1,47 +1,51 @@
-// /Cours/service-worker.js
 const CACHE_NAME = "cours-cache-v1";
 const ASSETS = [
-  "/Cours/",
-  "/Cours/index.html",
-  // أضف هنا ملفاتك الحقيقية:
-  // "/Cours/styles.css",
-  // "/Cours/main.js",
-  // "/Cours/icons/icon-192.png",
-  // "/Cours/icons/icon-512.png"
+  "./",
+  "index.html",
+  "manifest.json",
+  "icons/icon-192.png",
+  "icons/icon-512.png"
+  // أضف هنا ملفاتك الأخرى إذا وُجدت: "styles.css", "main.js", ...
 ];
 
-self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then((c) => c.addAll(ASSETS)));
+self.addEventListener("install", e => {
+  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)));
   self.skipWaiting();
 });
 
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.map((k) => (k !== CACHE_NAME ? caches.delete(k) : null)))
+self.addEventListener("activate", e => {
+  e.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.map(k => (k !== CACHE_NAME ? caches.delete(k) : null)))
     )
   );
   self.clients.claim();
 });
 
-self.addEventListener("fetch", (event) => {
-  const { request } = event;
-  if (request.method !== "GET") return;
-  event.respondWith(
-    caches.match(request).then((cached) => {
+self.addEventListener("fetch", e => {
+  const req = e.request;
+  if (req.method !== "GET") return;
+
+  // للصفحات: شبكة أولاً، ثم الكاش لو أوفلاين
+  if (req.mode === "navigate") {
+    e.respondWith(fetch(req).catch(() => caches.match("index.html")));
+    return;
+  }
+
+  // لباقي الملفات: Cache-first + تخزين نفس-الأصل فقط
+  e.respondWith(
+    caches.match(req).then(cached => {
       if (cached) return cached;
-      return fetch(request)
-        .then((resp) => {
-          const copy = resp.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            try { cache.put(request, copy); } catch (_) {}
-          });
-          return resp;
-        })
-        .catch(() => {
-          // ممكن ترجع صفحة Offline هنا لو أنشأتها:
-          // return caches.match("/Cours/offline.html");
-        });
+      return fetch(req).then(resp => {
+        try {
+          const sameOrigin = new URL(req.url).origin === self.location.origin;
+          if (sameOrigin) {
+            const copy = resp.clone();
+            caches.open(CACHE_NAME).then(c => c.put(req, copy));
+          }
+        } catch (_) {}
+        return resp;
+      });
     })
   );
 });
