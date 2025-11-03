@@ -367,5 +367,40 @@
     });
   }
 </script>
+<!-- Chrome-only install button -->
+<script>
+  const installBtn = document.createElement('button');
+  installBtn.textContent = 'Installer l’application';
+  installBtn.style.cssText =
+    'position:fixed;bottom:20px;left:20px;padding:10px 16px;border:none;border-radius:10px;font-weight:700;cursor:pointer;background:#0a84ff;color:#fff;box-shadow:0 6px 18px rgba(10,132,255,.35);display:none;z-index:9999';
+  document.body.appendChild(installBtn);
+
+  function isGoogleChrome() {
+    const ua = navigator.userAgent;
+    return (
+      (ua.includes('Chrome/') || ua.includes('CriOS/')) &&
+      !ua.includes('Edg/') &&
+      !ua.includes('OPR/') &&
+      !ua.includes('SamsungBrowser') &&
+      !ua.includes('Brave')
+    );
+  }
+
+  let deferredPrompt;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (isGoogleChrome()) installBtn.style.display = 'inline-block';
+  });
+
+  installBtn.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    installBtn.style.display = 'none';
+  });
+</script>
+
 </body>
 </html>
