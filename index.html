@@ -290,6 +290,11 @@
       ]},
       {id:'pathologie', name:'Pathologie', lessons:[
         {title:'Cours 01', desc:'Cabinet dentaire et dispositifs chirurgicaux', pdf:'https://drive.google.com/file/d/1bs0U0Tmaek4YvquXE973AalHl6Y9UeHT/preview'},
+{title:'Cours 02', desc:'approche psychologique', pdf:'https://drive.google.com/file/d/14qwr1E627nJgewKXVnf3DLTLQ_TNGjo2/preview'},
+{title:'Cours 03', desc:'Cabinet Dentaire et Dispositifs chirurgicaux ', pdf:'https://drive.google.com/file/d/1bs0U0Tmaek4YvquXE973AalHl6Y9UeHT/preview'},
+
+
+
       ]},
       {id:'ODF', name:'ODF', lessons:[
         {title:'Cours 01', desc:'Introduction', pdf:'https://drive.google.com/file/d/1d1YOmQ_AHg6oE6ndxpbc00AmACYtXQvh/preview'},
@@ -302,6 +307,13 @@
         {title:'Cours 01', desc:'la sante bucco dentaire et les populations a risque', pdf:'https://drive.google.com/file/d/1iuM10dx5PSyPu4wyPAZr1fBQPDE99ndJ/preview'},
         {title:'Cours 02', desc:'ALIMENTATION, NUTRITION ET SANTE DENTAIRE', pdf:'https://drive.google.com/file/d/1tGl6_m8_euI-GjEdLX4h8S48tC3_UUDR/preview'}
       ]},
+            {id:'Biomateriaux', name:'Biomateriaux', lessons:[
+{title:'Cours', desc:'La-biocompatibilité', pdf:'https://drive.google.com/file/d/1UniVOUnT8gAMNoHR0ot--3A2ZR8hV_Gs/preview'},
+{title:'Cours', desc:'Les matériaux à empreintes', pdf:'https://drive.google.com/file/d/1vtDCCm0Tmt5sG-lL7MhKcNlZzMDj9Xie/preview'},
+
+
+
+            ]}
     ];
 
     const tabs = document.getElementById('tabs');
@@ -405,6 +417,111 @@
     deferredPrompt = null;
     installBtn.style.display = 'none';
   });
+</script>
+<!-- Dua Overlay — modern, eye-comfort -->
+<script>
+(() => {
+  // ===== Config (يمكنك تعديلها) =====
+  const DUAA_TEXT = `رَبِّ اشْرَحْ لِي صَدْرِي<br>وَيَسِّرْ لِي أَمْرِي<br>وَاحْلُلْ عُقْدَةً مِنْ لِسَانِي<br>يَفْقَهُوا قَوْلِي`;
+  const SHOW_ONCE_PER_DAYS = 1; // يظهر مرة كل X أيام
+  const AUTO_CLOSE_MS = 0;      // 0 = عدم الإغلاق التلقائي
+
+  // ===== منطق "مرة كل X أيام" =====
+  const key = "__duaa_last_shown";
+  const last = parseInt(localStorage.getItem(key) || "0", 10);
+  const now = Date.now();
+  const dayMs = 24 * 60 * 60 * 1000;
+  if (now - last < SHOW_ONCE_PER_DAYS * dayMs) return;
+
+  // ===== إنشاء العناصر =====
+  const overlay = document.createElement("div");
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.style.cssText = `
+    position: fixed; inset: 0; z-index: 9999;
+    display: grid; place-items: center;
+    background: color-mix(in oklab, #0b1020 75%, transparent);
+    backdrop-filter: blur(10px) saturate(120%);
+  `;
+
+  const panel = document.createElement("div");
+  panel.style.cssText = `
+    --card: color-mix(in oklab, #0ea5e9 10%, #0b1020 90%);
+    --ink: #e6f3ff;
+    --accent: #60a5fa;
+    --glow: 0 10px 40px rgba(14,165,233,.25);
+    max-width: min(680px, 92vw);
+    border-radius: 22px;
+    border: 1px solid color-mix(in oklab, #8ecaff 25%, transparent);
+    background:
+      radial-gradient(140% 100% at 0% 0%, rgba(96,165,250,.18), transparent 55%),
+      radial-gradient(140% 120% at 100% 100%, rgba(14,165,233,.2), transparent 60%),
+      color-mix(in oklab, #0b1020 75%, #0ea5e9 10%);
+    box-shadow: var(--glow);
+    padding: clamp(18px, 3.8vw, 28px);
+    text-align: center;
+    color: var(--ink);
+    font-family: "Cairo", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    transform: translateY(6px);
+    opacity: 0;
+    animation: duaaFadeIn .55s ease forwards;
+  `;
+
+  panel.innerHTML = `
+    <div style="display:flex;gap:12px;align-items:center;justify-content:center;margin-bottom:12px;">
+      <div style="width:12px;height:12px;border-radius:50%;background:#34d399;box-shadow:0 0 20px rgba(52,211,153,.7);"></div>
+      <div style="font-weight:700;letter-spacing:.5px;opacity:.9">دعاء البداية</div>
+    </div>
+    <p style="
+      margin:0 0 14px;
+      font-size:clamp(20px, 2.6vw, 28px);
+      line-height:1.8;
+      color:var(--ink);
+      text-shadow:0 1px 0 rgba(0,0,0,.15);
+    ">
+      🌿 <strong>${DUAA_TEXT}</strong> 🌿
+    </p>
+    <button id="duaa-close" style="
+      margin-top:8px;
+      padding:10px 18px;
+      border:none;border-radius:12px;
+      font-weight:700; cursor:pointer;
+      background: linear-gradient(135deg, #3b82f6, #22d3ee);
+      color:white;
+      box-shadow: 0 8px 24px rgba(34,211,238,.35);
+      transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+    " aria-label="أمين">
+      💙 آمين
+    </button>
+    <style>
+      @media (prefers-reduced-motion: reduce) {
+        #duaa-close { transition: none !important; }
+      }
+      @keyframes duaaFadeIn { from {opacity:0; transform:translateY(8px)} to {opacity:1; transform:translateY(0)} }
+      @keyframes duaaFadeOut { from {opacity:1; transform:translateY(0)} to {opacity:0; transform:translateY(6px)} }
+      #duaa-close:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(34,211,238,.45); filter: saturate(110%); }
+      #duaa-close:active { transform: translateY(0); }
+    </style>
+  `;
+
+  overlay.appendChild(panel);
+  document.addEventListener("keydown", escClose);
+  overlay.addEventListener("click", (e) => { if (e.target === overlay) close(); });
+  panel.querySelector("#duaa-close").addEventListener("click", close);
+  document.body.appendChild(overlay);
+
+  if (AUTO_CLOSE_MS > 0) setTimeout(close, AUTO_CLOSE_MS);
+
+  function close() {
+    localStorage.setItem(key, String(Date.now()));
+    panel.style.animation = "duaaFadeOut .45s ease forwards";
+    setTimeout(() => {
+      overlay.remove();
+      document.removeEventListener("keydown", escClose);
+    }, 450);
+  }
+  function escClose(e){ if (e.key === "Escape") close(); }
+})();
 </script>
 
 </body>
